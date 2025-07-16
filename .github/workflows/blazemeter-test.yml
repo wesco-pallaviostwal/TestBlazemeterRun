@@ -14,10 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run BlazeMeter Test
+      - name: Run Taurus test on BlazeMeter Cloud
         run: |
-          docker pull blazemeter/taurus
-          docker run --rm -v $(pwd):/bzt-configs \
-            -e BLAZEMETER_API_KEY=${{ secrets.BLAZEMETER_API_KEY }} \
-            -e BLAZEMETER_API_SECRET=${{ secrets.BLAZEMETER_API_SECRET }} \
-            blazemeter/taurus -cloud -report
+          docker run --rm -v ${{ github.workspace }}:/bzt-configs \
+            -e BZA_TOKEN=${{ secrets.BLAZEMETER_API_KEY }} \
+            blazemeter/taurus test.yml -cloud -report
