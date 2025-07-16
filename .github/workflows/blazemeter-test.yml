@@ -1,0 +1,23 @@
+name: BlazeMeter Performance Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-blazemeter-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run BlazeMeter Test
+        run: |
+          docker pull blazemeter/taurus
+          docker run --rm -v $(pwd):/bzt-configs \
+            -e BLAZEMETER_API_KEY=${{ secrets.BLAZEMETER_API_KEY }} \
+            -e BLAZEMETER_API_SECRET=${{ secrets.BLAZEMETER_API_SECRET }} \
+            blazemeter/taurus -cloud -report
