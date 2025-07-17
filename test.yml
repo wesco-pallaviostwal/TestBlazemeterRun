@@ -1,5 +1,6 @@
 execution:
   - scenario: sample_test
+    executor: blazemeter
     concurrency: 1
     ramp-up: 1m
     hold-for: 2m
@@ -7,5 +8,5 @@ execution:
 scenarios:
   sample_test:
     requests:
-      - url: https://example.com/api/health
+      - url: https://www.google.com
         method: GET
