@@ -14,6 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-puthon@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install Taurus
+        run: pip install bzt
+
       - name: Run Taurus test on BlazeMeter Cloud
         run: |
           export BZT_APIKEY=${{secrets.BLAZEMETER_API_KEY}}
