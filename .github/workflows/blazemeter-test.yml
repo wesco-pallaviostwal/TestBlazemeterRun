@@ -10,6 +10,9 @@ jobs:
   run-blazemeter-test:
     runs-on: ubuntu-latest
 
+    env:
+      BZT_APIKEY: ${{secrets.BLAZEMETER_API_KEY}}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
